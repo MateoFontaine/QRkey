@@ -1,0 +1,110 @@
+---
+import familias from '../../data/familias.json';
+
+export async function getStaticPaths() {
+  return familias.map(familia => ({
+    params: { id: familia.id }
+  }));
+}
+
+const { id } = Astro.params;
+const familia = familias.find(f => f.id === id);
+
+if (!familia) {
+  throw new Error(`No se encontró la familia con id ${id}`);
+}
+---
+
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Llaves perdidas</title>
+    <style>
+      :root {
+        --bg-start: #0f2027;
+        --bg-mid: #203a43;
+        --bg-end: #2c5364;
+        --card-bg: rgba(255, 255, 255, 0.05);
+        --highlight: #00c6ff;
+        --highlight-hover: #0077b6;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--bg-start), var(--bg-mid), var(--bg-end));
+        color: white;
+        font-family: 'Segoe UI', sans-serif;
+        padding: 20px;
+      }
+
+      .card {
+        background: var(--card-bg);
+        padding: 40px 30px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        text-align: center;
+        max-width: 400px;
+        width: 100%;
+        animation: fadeIn 0.7s ease-out;
+      }
+
+      .card h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        font-weight: 500;
+        color: #ffffff;
+      }
+
+      .telefono {
+        display: block;
+        background: var(--highlight);
+        color: white;
+        padding: 14px 20px;
+        border-radius: 10px;
+        margin: 10px 0;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        text-align: left;
+      }
+
+      .telefono:hover {
+        background: var(--highlight-hover);
+        transform: translateX(4px);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>🔑 Si encontraste estas llaves,<br />por favor llamá a:</h1>
+
+      <a class="telefono" href={`tel:${familia.telefono}`}>{familia.telefono}</a>
+
+      {familia.alternativos.map((tel) => (
+        <a class="telefono" href={`tel:${tel}`}>{tel}</a>
+      ))}
+    </div>
+  </body>
+</html>

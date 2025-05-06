@@ -1,0 +1,15 @@
+[
+    {
+      "id": "1",
+      "nombre": "Familia Gómez",
+      "telefono": "1122334455",
+      "alternativos": ["1166778899", "1144556677"]
+    },
+    {
+      "id": "2",
+      "nombre": "Familia Pérez",
+      "telefono": "1199887766",
+      "alternativos": ["1100110011"]
+    }
+  ]
+  

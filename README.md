@@ -11,4 +11,34 @@ Este proyecto fue desarrollado con **Astro** y permite generar una página únic
 - ✅ Animaciones suaves y fondo con gradiente
 
 ## 📁 Estructura del Proyecto
+astro-llaves/
+├── public/
+├── src/
+│ ├── data/
+│ │ └── familias.json
+│ └── pages/
+│ └── familia/
+│ └── [id].astro
+│ └── index.astro (opcional)
+├── package.json
+├── astro.config.mjs
+└── README.md
 
+
+## 📄 Archivo `familias.json`
+
+```json
+[
+  {
+    "id": "1",
+    "nombre": "Familia Gómez",
+    "telefono": "1122334455",
+    "alternativos": ["1166778899", "1144556677"]
+  },
+  {
+    "id": "2",
+    "nombre": "Familia Pérez",
+    "telefono": "1199887766",
+    "alternativos": ["1100110011"]
+  }
+]
